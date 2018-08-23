@@ -24,7 +24,7 @@
 </div>
 <!-- /header -->
 
-<div class="content mt-3">
+<div class="content mt-3 animated fadeIn">
   <div class="card">
     <div class="card-header">
       <strong class="cart-title">Tambah Data Buku</strong>
@@ -80,10 +80,4 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $('.selectpicker').on('change', function(){
-    console.log('ok');
-  });
-</script>
 @endsection

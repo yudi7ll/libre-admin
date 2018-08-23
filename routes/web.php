@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Auth::routes();
@@ -31,10 +31,10 @@ Route::group(['middleware' => 'auth'], function(){
   Route::get('/editbuku/{$id}', 'BukuController@edit')->name('editbuku');
 
   // penjualan
+  Route::get('/penjualan', 'PenjualanController@index')->name('penjualan');
   Route::get('/penjualan/edit/{id}', 'PenjualanController@edit')->name('penjualan.edit');
   Route::put('/penjualan/update/{id}', 'PenjualanController@update')->name('penjualan.update');
   Route::get('/penjualan/tambah', 'PenjualanController@tambah')->name('penjualan.tambah');
-  Route::get('/penjualan', 'PenjualanController@index')->name('penjualan');
   Route::post('/penjualan/tambah', 'PenjualanController@tambah')->name('penjualan.tambah');
   Route::delete('/penjualan/delete/{id}', 'PenjualanController@destroy')->name('penjualan.delete');
   

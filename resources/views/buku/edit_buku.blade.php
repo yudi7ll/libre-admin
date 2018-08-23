@@ -81,10 +81,4 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $('.selectpicker').on('change', function(){
-    console.log('ok');
-  });
-</script>
 @endsection

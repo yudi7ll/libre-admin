@@ -92,12 +92,6 @@
   </div><!-- .animated -->
 </div><!-- .content -->
 
-
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/plugins.js"></script>
-<script src="assets/js/main.js"></script>
-
-
 <script src="assets/js/lib/data-table/datatables.min.js"></script>
 <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
 <script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>

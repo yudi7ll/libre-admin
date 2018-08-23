@@ -23,7 +23,7 @@
 </div>
 <!-- /header -->
 
-<div class="content mt-3">
+<div class="content mt-3 animated fadeIn">
     @if (session('messages'))  
         <div class="alert alert-{{ session('messages')[0] }} alert-dismissible fade show" role="alert">
             <span class="badge badge-{{ session('messages')[0] }}">{{ session('messages')[1] }}</span> {{ session('messages')[2] }}
