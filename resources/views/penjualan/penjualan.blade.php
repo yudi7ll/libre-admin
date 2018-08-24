@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('assets/css/lib/datatable/dataTables.bootstrap.min.css') }}">
 
 
 
@@ -53,8 +53,9 @@
                   <th>No</th>
                   <th>Buku</th>
                   <th>Tanggal Jual</th>
-                  <th>Harga</th>
+                  <th>Harga Satuan</th>
                   <th>Jumlah</th>
+                  <th>Total</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -66,9 +67,10 @@
                   <tr>
                     <th>{{ $no++ }}</th>
                     <td>{{ $penjualan->buku }}</td>
-                    <td>{{ $penjualan->tanggal_jual }}</td>
+                    <td>{{ $penjualan->created_at->diffForHumans() }}</td>
                     <td>{{ 'Rp. '.$penjualan->harga }}</td>
                     <td>{{ $penjualan->jumlah }}</td>
+                    <td>{{ 'Rp. '.$penjualan->harga * $penjualan->jumlah }}</td>
                     <td>
                       <form class="form-inline" action="{!! route('penjualan.delete', $penjualan) !!}" method="POST">
                           <a href="{!! route('penjualan.edit', $penjualan) !!}"><i class="fa fa-pencil text-primary mr-1"></i></a>
@@ -100,11 +102,53 @@
 <script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/datatables-init.js') }}"></script>
 
+{{-- init datatables --}}
 <script type="text/javascript">
-$(document).ready(function() {
-  $('#bootstrap-data-table-export').DataTable();
-} );
+(function ($) {
+    //    "use strict";
+
+
+    /*  Data Table
+    -------------*/
+
+  $('#bootstrap-data-table').DataTable({
+    lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    order: [2, 'desc']
+  });
+
+
+
+  $('#bootstrap-data-table-export').DataTable({
+    dom: 'lBfrtip',
+    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+  
+  $('#row-select').DataTable( {
+      initComplete: function () {
+        this.api().columns().every( function () {
+          var column = this;
+          var select = $('<select class="form-control"><option value=""></option></select>')
+            .appendTo( $(column.footer()).empty() )
+            .on( 'change', function () {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+    
+              column
+                .search( val ? '^'+val+'$' : '', true, false )
+                .draw();
+            } );
+    
+          column.data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+          } );
+        } );
+      }
+    } );
+})(jQuery);
 </script>
 @endsection

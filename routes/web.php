@@ -48,6 +48,15 @@ Route::group(['middleware' => 'auth'], function(){
   Route::get('/pembelian/edit/{id}', 'PembelianController@edit')->name('pembelian.edit');
   Route::put('/pembelian/update/{id}', 'PembelianController@update')->name('pembelian.update');
   
+  // staff
+  Route::get('/staff', 'StaffController@index');
+  Route::get('/staff/profile', 'StaffController@index')->name('staff.profile');
+  Route::get('/staff/list', 'StaffController@list')->name('staff.list');
+  Route::get('staff/tambah', 'StaffController@tambah')->name('staff.tambah');
+  Route::delete('staff/delete', 'StaffController@destroy')->name('staff.delete');
+  Route::get('staff/edit/{id}', 'StaffController@edit')->name('staff.edit');
+  Route::post('staff/edit/{id}', 'StaffController@edit')->name('staff.edit');
+  
   // return login page
   Route::get('/logout', 'HomeController@logout')->name('logout'); 
 }

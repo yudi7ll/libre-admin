@@ -54,11 +54,11 @@
         </div>
         <div class="form-group col-sm-6">
             <label for="jumlah">Jumlah Barang</label>
-            <input type="text" name="jumlah" class="form-control" id="jumlah" placeholder="Masukkan Jumlah Barang">
+            <input type="number" name="jumlah" class="form-control" id="jumlah" placeholder="Masukkan Jumlah Barang">
         </div>
         <div class="form-group col-sm-6">
             <label for="harga">Harga Barang</label>
-            <input type="text" name="harga" class="form-control" id="harga" placeholder="Masukkan Harga Barang">
+            <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan Harga Barang">
         </div>
         <div class="form-group col-sm-6">
             <label for="supplier">Nama Supplier</label>

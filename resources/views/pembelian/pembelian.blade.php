@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('assets/css/lib/datatable/dataTables.bootstrap.min.css') }}">
 
 
 
@@ -66,7 +66,7 @@
                 @foreach ($pembelians as $pembelian)
                   <tr>
                     <th>{{ $no++ }}</th>
-                    <td>{{ $pembelian->barang }}</td>
+                    <td>{{ str_limit($pembelian->barang, 25) }}</td>
                     <td>{{ $pembelian->jumlah }}</td>
                     <td>{{ 'Rp. '.$pembelian->harga }}</td>
                     <td>{{ $pembelian->supplier }}</td>
@@ -92,24 +92,64 @@
   </div><!-- .animated -->
 </div><!-- .content -->
 
-<script src="assets/js/lib/data-table/datatables.min.js"></script>
-<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-<script src="assets/js/lib/data-table/jszip.min.js"></script>
-<script src="assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="assets/js/lib/data-table/buttons.print.min.js"></script>
-<script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
-<script src="assets/js/lib/data-table/datatables-init.js"></script>
+<script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
 
 
+{{-- init datatables --}}
 <script type="text/javascript">
-    $(document).ready(function() {
-      $('#bootstrap-data-table-export').DataTable({
-          "order": [[ 5, "desc" ]]
-      });
+(function ($) {
+    //    "use strict";
+
+
+    /*  Data Table
+    -------------*/
+
+  $('#bootstrap-data-table').DataTable({
+    lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    order: [5, 'asc']
+  });
+
+
+
+  $('#bootstrap-data-table-export').DataTable({
+    dom: 'lBfrtip',
+    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+  
+  $('#row-select').DataTable( {
+      initComplete: function () {
+        this.api().columns().every( function () {
+          var column = this;
+          var select = $('<select class="form-control"><option value=""></option></select>')
+            .appendTo( $(column.footer()).empty() )
+            .on( 'change', function () {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+    
+              column
+                .search( val ? '^'+val+'$' : '', true, false )
+                .draw();
+            } );
+    
+          column.data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+          } );
+        } );
+      }
     } );
+})(jQuery);
 </script>
 @endsection

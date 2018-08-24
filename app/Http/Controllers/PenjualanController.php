@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Penjualan;
 use App\Buku;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 
 class PenjualanController extends Controller
 {
@@ -37,7 +37,7 @@ class PenjualanController extends Controller
             $penjualan->buku = $request->buku;
             $penjualan->harga = $request->harga;
             $penjualan->jumlah = $request->jumlah;
-            $penjualan->tanggal_jual = date('Y-m-d H:i:s');
+            $penjualan->tanggal_jual = Carbon::now();
             $penjualan->save();
             
             return redirect('penjualan')->with('messages', ['success', 'Done!', 'Data Penjualan Berhasil Disimpan.']);

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class PenjualanSeeder extends Seeder
 {
@@ -14,19 +15,25 @@ class PenjualanSeeder extends Seeder
         DB::table('penjualans')->insert([
             [   
                 'buku' => 'IPA',
-                'tanggal_jual' => date('Y-m-d H:i:s'),
+                'tanggal_jual' => Carbon::now(),
                 'harga' => 20000,
-                'jumlah' => 1
+                'jumlah' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],[
                 'buku' => 'Computer',
-                'tanggal_jual' => date('Y-m-d H:i:s'),
+                'tanggal_jual' => Carbon::now(),
                 'harga' => 24000,
-                'jumlah' => 5
+                'jumlah' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],[
                 'buku' => str_random(10),
-                'tanggal_jual' => date('Y-m-d H:i:s'),
+                'tanggal_jual' => Carbon::now(),
                 'harga' => 100000,
-                'jumlah' => 1
+                'jumlah' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ]);
     }
