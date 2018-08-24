@@ -16,7 +16,7 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <li><a href="{{ route('staff.profile') }}">Profile</a></li>
-                    <li class="active">Daftar Staff</li>
+                    <li class="active">Manage Staff</li>
                 </ol>
             </div>
         </div>
@@ -24,7 +24,15 @@
 </div>
 <!-- /header -->
 
-<div class="content animated fadeIn">
+<div class="content animated fadeIn mt-3">
+  @if (session('messages'))  
+    <div class="alert alert-{{ session('messages')[0] }} alert-dismissible fade show" role="alert">
+        <span class="badge badge-{{ session('messages')[0] }}">{{ session('messages')[1] }}</span> {{ session('messages')[2] }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  @endif
   <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -33,9 +41,9 @@
           </div>
           <div class="card-body">
             <div class="m-3">
-              <a href="{{ route('staff.tambah') }}" class="btn btn-primary my-1"><i class="fa fa-plus"></i> Tambah</a>
+              <a href="{{ route('staff.create') }}" class="btn btn-primary my-1"><i class="fa fa-plus"></i> Tambah</a>
             </div>
-            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+            <table id="bootstrap-data-table" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -58,7 +66,7 @@
                     <td>{{ $staff->email }}</td>
                     <td>{{ $staff->jabatan }}</td>
                     <td>
-                      <form class="form-inline" action="{!! route('staff.delete', $staff) !!}" method="POST">
+                      <form class="form-inline" action="{!! route('staff.destroy', $staff) !!}" method="POST">
                           <a href="{!! route('staff.edit', $staff) !!}"><i class="fa fa-pencil text-primary mr-1"></i></a>
                           @csrf
                           @method('DELETE')

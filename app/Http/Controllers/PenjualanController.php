@@ -48,15 +48,37 @@ class PenjualanController extends Controller
         }
     }
 
+    /**
+     * Display for edit
+     */
     public function edit($id)
     {
-        $penjualan = Penjualan::find($id)->get();
+        $penjualan = Penjualan::where('id', $id)->first();
         return view('penjualan.edit_penjualan', compact('penjualan'));
     }
 
-    public function update()
+    /**
+     * Storing into database
+     */
+    public function update(Request $request, $id)
     {
+         // validate request
+         $request->validate([
+            'buku' => 'required',
+            'tanggal_jual' => 'required',
+            'jumlah' => 'required|string|max:5',
+            'harga' => 'required'
+        ]);
 
+        $penjualan = Penjualan::where('id', $id);
+        $penjualan->update([
+            'buku' => $request->buku,
+            'tanggal_jual' => $request->tanggal_jual,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga
+        ]);
+
+        return redirect('penjualan')->with('messages', ['success', 'Done!', 'Data berhasil diperbaharui.']);
     }
 
     public function destroy($id)

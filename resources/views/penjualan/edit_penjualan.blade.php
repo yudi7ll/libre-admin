@@ -57,9 +57,9 @@
         </div>
         <div class="form-group col-sm-6">
           <label for="jumlah">Jumlah</label>
-          <input type="text" name="jumlah" class="form-control" id="jumlah" placeholder="Masukkan Jumlah Barang" value="{{ $penjualan->jumlah }}">
+          <input type="number" name="jumlah" class="form-control" id="jumlah" placeholder="Masukkan Jumlah Barang" value="{{ $penjualan->jumlah }}">
         </div>
-        <button type="submit" name="editpenjualan" class="btn btn-primary mx-3"><i class="fa fa-save"> Save</i></button>
+        <button type="submit" class="btn btn-primary mx-3"><i class="fa fa-save"> Save</i></button>
       </form>
     </div>
   </div>

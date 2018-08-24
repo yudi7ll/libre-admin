@@ -66,7 +66,7 @@
                 @foreach ($penjualans as $penjualan)
                   <tr>
                     <th>{{ $no++ }}</th>
-                    <td>{{ $penjualan->buku }}</td>
+                    <td>{{ str_limit($penjualan->buku, 20) }}</td>
                     <td>{{ $penjualan->created_at->diffForHumans() }}</td>
                     <td>{{ 'Rp. '.$penjualan->harga }}</td>
                     <td>{{ $penjualan->jumlah }}</td>

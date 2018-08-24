@@ -68,13 +68,13 @@
                 <li class="{{ Route::currentRouteNamed('penjualan') ? 'active' : '' }}">
                     <a href="{{ route('penjualan') }}"><i class="menu-icon fa fa-shopping-cart"></i>Penjualan</a>
                 </li>
-                <li class="menu-item-has-children dropdown {{ str_contains(Route::currentRouteName(), 'tambah') ? 'active' : '' }}">
+                <li class="menu-item-has-children dropdown {{ str_contains(Route::currentRouteName(), ['tambah', 'create']) ? 'active' : '' }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-plus-square"></i>Tambah Data</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="menu-icon fa fa-plus"></i><a href="{{ route('tambahbuku') }}">Buku</a></li>
                         <li><i class="menu-icon fa fa-plus"></i><a href="{{ route('penjualan.tambah') }}">Penjualan</a></li>
                         <li><i class="menu-icon fa fa-plus"></i><a href="{{ route('pembelian.tambah') }}">Pembelian</a></li>
-                        <li><i class="menu-icon fa fa-plus"></i><a href="{{ route('staff.tambah') }}">Staff</a></li>
+                        <li><i class="menu-icon fa fa-plus"></i><a href="{{ route('staff.create') }}">Staff</a></li>
                     </ul>
                 </li>
 
@@ -82,8 +82,8 @@
                 <li class="{{ str_contains(Route::currentRouteName(), 'profile') ? 'active' : '' }}">
                     <a href="{{ route('staff.profile') }}"> <i class="menu-icon ti-user"></i>Profile </a>
                 </li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'list') ? 'active' : '' }}">
-                    <a href="{{ route('staff.list') }}"> <i class="menu-icon ti-book"></i>Daftar Staff </a>
+                <li class="{{ Route::currentRouteNamed('staff.index') ? 'active' : '' }}">
+                    <a href="{{ route('staff.index') }}"> <i class="menu-icon ti-book"></i>Manage Staff </a>
                 </li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'logout') ? 'active' : '' }}">
                     <a href="{{ route('logout') }}"> <i class="menu-icon ti-share-alt"></i>Logout</a>
@@ -215,8 +215,6 @@
         </div>
     </header><!-- /header -->
 
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     @yield('content')

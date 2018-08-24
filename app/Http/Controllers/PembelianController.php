@@ -17,7 +17,7 @@ class PembelianController extends Controller
     // return data pembelian
     public function index()
     {
-        $data = Pembelian::get();
+        $data = Pembelian::all();
         return view('pembelian.pembelian', ['pembelians' => $data]);
     }
 
@@ -48,13 +48,19 @@ class PembelianController extends Controller
         }
     }
 
+    /**
+     * Display data for edit
+     */
+
     public function edit($id)
     {
-        $pembelians = Pembelian::where('id', $id)->get();
-        foreach($pembelians as $pembelian);
+        $pembelian = Pembelian::where('id', $id)->first();
         return view('pembelian.edit_pembelian', ['pembelian' => $pembelian]);
     }
 
+    /**
+     * Store into database
+     */
     public function update(Request $request, $id)
     {
         if($request->has('editpembelian')){
@@ -77,6 +83,14 @@ class PembelianController extends Controller
             ]);
             return redirect('pembelian')->with('messages', ['success', 'Done!', 'Berhasil edit data pembelian!.']);
         }
-        
+    }
+
+    /**
+     * Delete
+     */
+    public function destroy($id)
+    {
+        Pembelian::find($id)->delete();
+        return redirect()->route('pembelian')->with('messages', ['danger', 'Deleted!', 'Data pembelian terhapus!.']);
     }
 }
