@@ -236,6 +236,7 @@
 </div> <!-- .content -->
 
 <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
+<script src="assets/js/widgets.js"></script>
 <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 
 <script>

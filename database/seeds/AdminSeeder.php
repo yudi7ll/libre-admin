@@ -16,7 +16,6 @@ class AdminSeeder extends Seeder
             'nama' => 'admin',
             'email' => 'admin@admin.com',
             'jabatan' => 'Admin',
-            'level' => 1,
             'nip' => '0001',
             'password' => bcrypt('123123'),
             'created_at' => Carbon::now(),
