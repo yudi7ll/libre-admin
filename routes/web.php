@@ -49,8 +49,8 @@ Route::group(['middleware' => 'auth'], function(){
   Route::put('/pembelian/update/{id}', 'PembelianController@update')->name('pembelian.update');
   
   // staff
-  Route::get('/staff/profile', 'StaffController@show')->name('staff.profile');
-  Route::resource('/staff', 'StaffController');
+  Route::get('/staff/profile', 'StaffController@profile')->name('staff.profile');
+  Route::resource('/staff', 'StaffController')->except(['show']);
   
   // return login page
   Route::get('/logout', 'HomeController@logout')->name('logout'); 

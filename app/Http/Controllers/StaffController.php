@@ -24,8 +24,9 @@ class StaffController extends Controller
      */
     public function profile(Request $request)
     {
-        $user = Staff::find($request);
-        return view('staff.profile', compact('user'));
+        // $user = Staff::find($request);
+        $user = auth()->user();
+        return view('staff.profile_staff', ['user' => $user]);
     }
 
     /**
@@ -46,19 +47,16 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|max:191|string',
-            'email' => 'email|required|unique:users',
-            'jabatan' => 'required|string',
-            'nip' => 'required|unique:users',
-        ]);
+        // validate $request
+        Staff::validateStaff($request);
 
-        $users = new Staff;
-        $users->nama = $request->nama;
-        $users->email = $request->email;
-        $users->jabatan = $request->jabatan;
-        $users->nip = $request->nip;
-        $users->save();
+        // insert into database
+        Staff::create([
+            'nama' => title_case($request->nama),
+            'jabatan' => title_case($request->jabatan),
+            'email' => $request->email,
+            'nip' => $request->nip
+        ]);
 
         return redirect()->route('staff.index')->with('messages', ['success', 'Done!', 'Staff baru berhasil didaftarkan.']);
     }
@@ -97,19 +95,17 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|max:191|string',
-            'email' => 'email|required|unique:users',
-            'jabatan' => 'required|string',
-            'nip' => 'required|unique:users',
-        ]);
-        $users = Staff::where('id', $id);
-        $users->update([
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'jabatan' => $request->jabatan,
-            'nip' => $request->nip
-        ]);
+        Staff::validateStaff($request);
+        Staff::find($id)
+            ->update(
+                [
+                    'nama' => title_case($request->nama),
+                    'jabatan' => title_case($request->jabatan),
+                    'email' => $request->email,
+                    'nip' => $request->nip
+                ]
+            );
+
 
         return redirect()->route('staff.index')->with('messages', ['success', 'Done!', 'Data berhasil diperbaharui.']);
     }

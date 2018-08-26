@@ -59,14 +59,22 @@
                 @endforeach
             </select>
         </div>
+
         <div class="form-goup col-sm-6">
             <label for="jumlah">Jumlah</label>
             <input type="number" class="form-control" name="jumlah" placeholder="Masukkan Jumlah Barang" value="{{ old('jumlah') }}">
         </div>
+
+        <div class="form-goup col-sm-6">
+            <label for="tanggal_jual">Tanggal Jual</label>
+            <input type="date" class="form-control" name="tanggal_jual" placeholder="Masukkan Tanggal Jual" value="{{ old('tanggal_jual ') }}">
+        </div>
+        
         <div class="form-group col-sm-6">
           <label for="harga">Harga Buku</label>
-          <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan Harga Buku (Rp.)" value="">
+          <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan Harga Buku (Rp.)" value="{{ old('harga') }}">
         </div>
+        <div class="col-sm-6"></div>
         <div class="col-sm-6"></div>
         <button type="submit" name="tambahpenjualan" class="btn btn-primary mx-3"><i class="fa fa-plus"></i> Tambah</button>
       </form>

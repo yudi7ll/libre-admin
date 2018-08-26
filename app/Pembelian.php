@@ -14,4 +14,17 @@ class Pembelian extends Model
         'supplier',
         'status'
     ];
+
+    
+    public function scopeValidatePembelian($query, $request)
+    {
+         // validate request
+         $request->validate([
+            'barang' => 'required',
+            'jumlah' => 'required|integer',
+            'harga' => 'required',
+            'supplier' => 'string|required',
+            'status' => 'integer|required'
+        ]);
+    }
 }

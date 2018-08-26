@@ -18,7 +18,7 @@ class CreateBukusTable extends Migration
             $table->string('judul', 200);
             $table->string('penulis', 100);
             $table->string('penerbit', 100);
-            $table->year('tahun_terbit');
+            $table->integer('tahun_terbit');
             $table->integer('jumlah');
             $table->string('genre', 255);
             $table->string('harga', 50);

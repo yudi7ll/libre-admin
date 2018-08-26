@@ -25,22 +25,16 @@ class PembelianController extends Controller
     {
         if($request->has('tambahpembelian')){
             // validate data
-            $request->validate([
-                'barang' => 'required',
-                'jumlah' => 'required|integer',
-                'harga' => 'required',
-                'supplier' => 'string|required',
-                'status' => 'integer|required'
-            ]);
-
+            Pembelian::validatePembelian($request);
+            
             // insert into database
-            $pembelian = new Pembelian;
-            $pembelian->barang = $request->barang;
-            $pembelian->jumlah = $request->jumlah;
-            $pembelian->harga = $request->harga;
-            $pembelian->supplier = $request->supplier;
-            $pembelian->status = $request->status;
-            $pembelian->save();
+            Pembelian::create(request([
+                'barang',
+                'jumlah',
+                'harga',
+                'supplier',
+                'status'
+            ]));
 
             return redirect('pembelian')->with('messages', ['success', 'Done!', 'Data pembelian berhasil ditambahkan!.']);
         }else{
@@ -65,22 +59,16 @@ class PembelianController extends Controller
     {
         if($request->has('editpembelian')){
             // validate request
-            $request->validate([
-                'barang' => 'required',
-                'jumlah' => 'required|integer',
-                'harga' => 'required',
-                'supplier' => 'string|required',
-                'status' => 'integer|required'
-            ]);
+            Pembelian::validatePembelian($request);
 
-            $pembelian = Pembelian::where('id', $id);
-            $pembelian->update([
-                'barang' => $request->barang,
-                'jumlah' => $request->jumlah,
-                'harga' => $request->harga,
-                'supplier' => $request->supplier,
-                'status' => $request->status,
-            ]);
+            // store into database
+            Pembelian::find($id)->update(request([
+                'barang',
+                'jumlah',
+                'harga',
+                'supplier',
+                'status'
+            ]));
             return redirect('pembelian')->with('messages', ['success', 'Done!', 'Berhasil edit data pembelian!.']);
         }
     }

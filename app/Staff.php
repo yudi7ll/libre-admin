@@ -15,4 +15,14 @@ class Staff extends Model
     protected $fillable = [
         'nama', 'email', 'jabatan', 'nip',
     ];
+
+    public function scopeValidateStaff($query, $request)
+    {
+        $request->validate([
+            'nama' => 'required|max:191|string',
+            'email' => 'email|required|unique:users',
+            'jabatan' => 'required|string',
+            'nip' => 'required|unique:users',
+        ]);
+    }
 }
