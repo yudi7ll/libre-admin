@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('content')
 
+@section('content')
 <!-- Header-->
 <div class="breadcrumbs">
     <div class="col-sm-4">
