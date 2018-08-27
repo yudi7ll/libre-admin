@@ -66,7 +66,9 @@
                 @foreach ($bukus as $buku)
                   <tr>
                     <th>{{ $no++ }}</th>
-                    <td>{{ str_limit($buku->judul, 10) }}</td>
+                    <td>
+                      <a href="{{ route('buku.show', $buku) }}" class="text-dark">{{ str_limit($buku->judul, 10) }}</a>
+                    </td>
                     <td>{{ str_limit($buku->penulis, 6) }}</td>
                     <td>{{ str_limit($buku->penerbit, 6) }}</td>
                     <td>{{ $buku->tahun_terbit }}</td>

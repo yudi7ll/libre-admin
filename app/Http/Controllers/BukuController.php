@@ -30,6 +30,13 @@ class BukuController extends Controller
 
     }
 
+    // return buku
+    public function show($id)
+    {
+      $buku = Buku::find($id)->first();
+      return view('buku.show', compact('buku'));
+    }
+
 
     // tambah data buku
     public function tambah(Request $request)

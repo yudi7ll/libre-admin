@@ -24,7 +24,7 @@
 </div>
 <!-- /header -->
 
-<div class="content mt-3">
+<div class="content mt-3 animated fadeIn">
   <div class="card">
     <div class="card-header">
       Edit Data Buku

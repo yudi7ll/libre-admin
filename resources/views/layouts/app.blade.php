@@ -15,7 +15,7 @@
     <title>{{ config('app.name', 'Libre') }}</title>
 
     {{-- favicon --}}
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">

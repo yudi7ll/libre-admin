@@ -13,15 +13,37 @@ class BukuSeeder extends Seeder
     public function run()
     {
         DB::table('bukus')->insert([
-            'judul' => str_random(10),
-            'penulis' => str_random(10),
-            'penerbit' => str_random(10),
-            'tahun_terbit' => Carbon::now()->format('Y'),
-            'jumlah' => 20,
-            'genre' => 'IPA',
-            'harga' => 154000,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+            [
+                'judul' => 'In Search of Lost Time',
+                'penulis' => 'Miguel de Cervantes',
+                'penerbit' => title_case(str_random(10)),
+                'tahun_terbit' => Carbon::now()->format('Y'),
+                'jumlah' => rand(1, 100),
+                'genre' => array_random(['IPS', 'IPA', 'Computer', 'Fiksi', 'Komik', 'Matematika', 'Action', 'Religion', 'Enginer']),
+                'harga' => rand(10000, 500000),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'judul' => 'Don Quixote',
+                'penulis' => 'James Joyce',
+                'penerbit' => title_case(str_random(10)),
+                'tahun_terbit' => Carbon::now()->format('Y'),
+                'jumlah' => rand(1, 100),
+                'genre' => array_random(['IPS', 'IPA', 'Computer', 'Fiksi', 'Komik', 'Matematika', 'Action', 'Religion', 'Enginer']),
+                'harga' => rand(10000, 500000),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'judul' => 'Ulysses',
+                'penulis' => 'F. Scott Fitzgerald',
+                'penerbit' => title_case(str_random(10)),
+                'tahun_terbit' => Carbon::now()->format('Y'),
+                'jumlah' => rand(1, 100),
+                'genre' => array_random(['IPS', 'IPA', 'Computer', 'Fiksi', 'Komik', 'Matematika', 'Action', 'Religion', 'Enginer']),
+                'harga' => rand(10000, 500000),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
         ]);
     }
 }

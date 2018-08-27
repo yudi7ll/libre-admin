@@ -26,7 +26,7 @@ class StaffController extends Controller
     {
         // $user = Staff::find($request);
         $user = auth()->user();
-        return view('staff.profile_staff', ['user' => $user]);
+        return view('staff.profile', ['user' => $user]);
     }
 
     /**
